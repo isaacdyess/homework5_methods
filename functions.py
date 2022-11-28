@@ -15,10 +15,15 @@ def numbers(num1, num2):
 ## takes in two points
 ## finds the distance between the points
 def dist(x1, y1, x2, y2):
-    dist = (x2 - x1) ** 2 + (y2 - y1) ** 2
-    dist = math.sqrt(dist)
+    if type(x1) == int or float and type(y1) == int or float and type(x2) == int or float and type(y2) == int or float:
+        dist = (x2 - x1) ** 2 + (y2 - y1) ** 2
+        dist = math.sqrt(dist)
 
-    return dist
+        return dist
+    else:
+        print("Inputs must be decimal or float.")
+        raise TypeError("inputs must be a number")
+    
 
 ## takes in a string -- reverses it
 ## then compares the two

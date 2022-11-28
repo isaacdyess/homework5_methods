@@ -1,6 +1,15 @@
 import pytest
 from functions import *
 
+@pytest.mark.parametrize("x1, y1, x2, y2, expected", [(3, 2, 2, 2, 1), (0.4, 0.5, 0.8, 0.5, 0.4), (0.4, 0.5, 0.7, 0.5, 0.3)])
+def test_dist(x1, y1, x2, y2, expected):
+    assert dist(x1, y1, x2, y2) == expected
+
+@pytest.mark.parametrize("x1, y1, x2, y2", [("test", "fail", "pass", "fail")])
+def test_dist_string(x1, y1, x2, y2):
+    with pytest.raises(TypeError):
+        dist(x1, y1, x2, y2)
+
 @pytest.mark.parametrize("values", ["racecar", "Racecar"])
 def test_isPalindrome(values):
     assert isPalindrome(values) == True
