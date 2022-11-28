@@ -1,6 +1,15 @@
 import pytest
 from functions import *
 
+@pytest.mark.parametrize("values", ["racecar", "Racecar"])
+def test_isPalindrome(values):
+    assert isPalindrome(values) == True
+
+@pytest.mark.parametrize("values", [5, True])
+def test_isPalindrome_type(values):
+    with pytest.raises(TypeError):
+        isPalindrome(values)
+
 def geninputs():
     inputs = ["5", "10", "0.8", "0.2"]
     for item in inputs:
@@ -59,12 +68,12 @@ def test_greetUser(capsys, first, middle, last, expected):
 
 @pytest.mark.parametrize("first, middle, last", [(1, 2, 3)])
 def test_greetUser_integer(first, middle, last):
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         greetUser(first, middle, last)
 
 @pytest.mark.parametrize("first, middle, last", [(True, False, True)])
 def test_greetUser_boolean(first, middle, last):
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         greetUser(first, middle, last)
 
 @pytest.mark.parametrize("numbers, index, expected", [([1, 2, 3], 1, "Your item at 1 index is 2")])

@@ -23,13 +23,17 @@ def dist(x1, y1, x2, y2):
 ## takes in a string -- reverses it
 ## then compares the two
 def isPalindrome(temp):
-    test = temp[::-1]
+    if type(temp) == str:
+        test = temp[::-1]
 
-    if(test == temp):
-        return True
+        if(test.lower() == temp.lower()):
+            return True
 
+        else:
+            return False
     else:
-        return False
+        print("Input must be of type string.")
+        raise TypeError("input must be string")
 
 ## has input to receive two numbers
 ## divides the two, then outputs the result
@@ -75,7 +79,7 @@ def greetUser(first, middle, last):
         print("Glad to have you!")
     else:
         print("Names must be string values.")
-        raise ValueError("name must be string")
+        raise TypeError("name must be string")
 
 ## takes in a Python list
 ## attempts to display the item at the index provided
