@@ -1,6 +1,36 @@
 import pytest
 from functions import *
 
+@pytest.mark.parametrize("filename, expected", [("functions.py", "File opened.")])
+def test_openFile_withFile(capsys, filename, expected):
+    openFile(filename)
+    captured_stdout, captured_stderr = capsys.readouterr()
+    assert captured_stdout.strip() == expected
+
+@pytest.mark.parametrize("filename, expected", [("", "File opened.")])
+def test_openFile_withoutFile(capsys, filename, expected):
+    with pytest.raises(FileNotFoundError):
+        openFile(filename)
+
+@pytest.mark.parametrize("filename, expected", [("lockedFile.txt", "File opened.")])
+def test_openFile_withLockedFile(capsys, filename, expected):
+    with pytest.raises(PermissionError):
+        openFile(filename)
+
+@pytest.mark.parametrize("num1, num2, expected", [(10, 2, 5)])
+def test_numbers_withNumbers(num1, num2, expected):
+    assert numbers(num1, num2) == expected
+
+@pytest.mark.parametrize("num1, num2, expected", [("10", "2", "5")])
+def test_numbers_withStrings(num1, num2, expected):
+    with pytest.raises(TypeError):
+        numbers(num1, num2)
+
+@pytest.mark.parametrize("num1, num2, expected", [(10, 0, 5)])
+def test_numbers_withStrings(num1, num2, expected):
+    with pytest.raises(ZeroDivisionError):
+        numbers(num1, num2)
+
 @pytest.mark.parametrize("x1, y1, x2, y2, expected", [(3, 2, 2, 2, 1), (0.4, 0.5, 0.8, 0.5, 0.4), (0.4, 0.5, 0.7, 0.5, 0.3)])
 def test_dist(x1, y1, x2, y2, expected):
     assert dist(x1, y1, x2, y2) == expected
