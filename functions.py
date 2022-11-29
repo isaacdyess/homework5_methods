@@ -3,15 +3,31 @@ import math
 ## opens a file in read mode
 ## filename received as a parameter
 def openFile(filename):
-    infile = open(filename, "r")
+    try:
+        infile = open(filename, "r")
 
-    print("File opened.")
+        print("File opened.")
+
+    except FileNotFoundError:
+        print("Error: File not found.")
+        raise FileNotFoundError
+    except PermissionError:
+        print("Error: Invalid file permissions.")
+        raise  PermissionError
 
 ## takes two numbers and returns
 ## the result of a division
 def numbers(num1, num2):
-    return num1 / num2
+    try:
+        return num1 / num2
+    except TypeError:
+        print("Error: Invalid data type")
+        raise TypeError
+    except ZeroDivisionError:
+        print("Error: Can not divide by zero")
+        raise ZeroDivisionError
 
+        
 ## takes in two points
 ## finds the distance between the points
 def dist(x1, y1, x2, y2):

@@ -21,17 +21,21 @@ def test_openFile_withLockedFile(capsys, filename, expected):
 def test_numbers_withNumbers(num1, num2, expected):
     assert numbers(num1, num2) == expected
 
+@pytest.mark.parametrize("num1, num2, expected", [(10.5, 2.5, 4.2)])
+def test_numbers_withDecimalNumbers(num1, num2, expected):
+    assert numbers(num1, num2) == expected
+
 @pytest.mark.parametrize("num1, num2, expected", [("10", "2", "5")])
 def test_numbers_withStrings(num1, num2, expected):
     with pytest.raises(TypeError):
         numbers(num1, num2)
 
 @pytest.mark.parametrize("num1, num2, expected", [(10, 0, 5)])
-def test_numbers_withStrings(num1, num2, expected):
+def test_numbers_withZero(num1, num2, expected):
     with pytest.raises(ZeroDivisionError):
         numbers(num1, num2)
 
-@pytest.mark.parametrize("x1, y1, x2, y2, expected", [(3, 2, 2, 2, 1), (0.4, 0.5, 0.8, 0.5, 0.4), (0.4, 0.5, 0.7, 0.5, 0.3)])
+@pytest.mark.parametrize("x1, y1, x2, y2, expected", [(3, 2, 2, 2, 1), (0.4, 0.5, 0.8, 0.5, 0.4), (-4, -3, 8, -3, 12)])
 def test_dist(x1, y1, x2, y2, expected):
     assert dist(x1, y1, x2, y2) == expected
 
